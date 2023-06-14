@@ -1,13 +1,13 @@
 //! Contains general/base functionality for checks.
 
+pub use no_multiple_empty_lines::NoMultipleEmptyLines;
+pub use no_tabs::NoTabs;
+
 mod no_multiple_empty_lines;
 mod no_tabs;
 
 /// A list of all checks. This is used by `check_all`.
-pub const CHECKS: &[&dyn Check] = &[
-    &no_tabs::NoTabs {},
-    &no_multiple_empty_lines::NoMultipleEmptyLines {},
-];
+pub const CHECKS: &[&dyn Check] = &[&NoTabs {}, &NoMultipleEmptyLines {}];
 
 /// A check.
 ///
