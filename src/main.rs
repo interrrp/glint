@@ -1,3 +1,10 @@
+use crate::check::check_all;
+
+mod check;
+
 fn main() {
-    println!("Hello, world!");
+    let text = "Hello,\tworld!";
+    for err in check_all(text) {
+        println!("{}", err);
+    }
 }
