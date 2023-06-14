@@ -1,11 +1,13 @@
 //! Contains the `Check` trait.
 
-pub use self::no_tabs::NoTabs;
-
+mod no_multiple_empty_lines;
 mod no_tabs;
 
 /// A list of all checks.
-pub const CHECKS: &[&dyn Check] = &[&NoTabs {}];
+pub const CHECKS: &[&dyn Check] = &[
+    &no_tabs::NoTabs {},
+    &no_multiple_empty_lines::NoMultipleEmptyLines {},
+];
 
 /// A check.
 ///
