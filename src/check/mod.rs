@@ -2,9 +2,11 @@
 
 pub use no_multiple_empty_lines::NoMultipleEmptyLines;
 pub use no_tabs::NoTabs;
+pub use result::CheckResult;
 
 mod no_multiple_empty_lines;
 mod no_tabs;
+mod result;
 
 /// A list of all checks. This is used by `check_all`.
 pub const CHECKS: &[&dyn Check] = &[&NoTabs {}, &NoMultipleEmptyLines {}];
@@ -12,8 +14,8 @@ pub const CHECKS: &[&dyn Check] = &[&NoTabs {}, &NoMultipleEmptyLines {}];
 /// A check.
 ///
 /// A check checks given text for a certain condition. If the condition is met, the check passes (
-/// returns `None` from `check`). If the condition is not met, the check fails (returns a `String`
-/// containing the error message from `check`).
+/// returns `None` from `check`). If the condition is not met, the check fails (returns a
+/// `CheckResult` containing the error message from `check`).
 pub trait Check {
     /// Gets the ID of the check.
     ///
@@ -22,8 +24,8 @@ pub trait Check {
 
     /// Checks the given text.
     ///
-    /// If the check fails, return a `String` with the appropriate error message.
-    fn check(&self, text: &str) -> Option<String>;
+    /// If the check fails, return a `CheckResult` with the appropriate info.
+    fn check(&self, text: &str) -> Option<CheckResult>;
 }
 
 /// Checks the given text with all checks.
