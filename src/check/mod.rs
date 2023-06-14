@@ -1,9 +1,9 @@
-//! Contains the `Check` trait.
+//! Contains general/base functionality for checks.
 
 mod no_multiple_empty_lines;
 mod no_tabs;
 
-/// A list of all checks.
+/// A list of all checks. This is used by `check_all`.
 pub const CHECKS: &[&dyn Check] = &[
     &no_tabs::NoTabs {},
     &no_multiple_empty_lines::NoMultipleEmptyLines {},
