@@ -30,15 +30,10 @@ pub trait Check {
 
 /// Checks the given text with all checks.
 ///
-/// This returns all errors from all checks. If there are no errors, this returns an empty `Vec`.
-/// Every error is a `String` containing the error message from the check, prefixed with the check
-/// ID and a colon (e.g. `no-tabs: tabs are not allowed`).
-pub fn check_all(text: &str) -> Vec<String> {
-    let mut errors = Vec::new();
-    for check in CHECKS {
-        if let Some(err) = check.check(text) {
-            errors.push(format!("{}: {}", check.id(), err));
-        }
-    }
-    errors
+/// This will return a list of all errors found in the text.
+pub fn check_all(text: &str) -> Vec<CheckResult> {
+    CHECKS
+        .iter()
+        .filter_map(|check| check.check(text))
+        .collect()
 }
